@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Berkay</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    color: #0ff;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.typing {
+    font-size: 2em;
+    border-right: 3px solid #0ff;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    50% { border-color: transparent }
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: #0ff;
+    border: 1px solid #0ff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #0ff;
+    color: #000;
+    transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<div class="typing">Berkay<br>(Welcome to)<br>"Nefret ediyorsan yenilmişsindir"</div>
+
+<div class="social-links">
+    <a href="https://instagram.com/kullaniciadi" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@kullaniciadi" target="_blank">TikTok</a>
+    <a href="https://discord.com/users/kullaniciadi" target="_blank">Discord</a>
+    <a href="https://youtube.com/c/kullaniciadi" target="_blank">YouTube</a>
+</div>
+
+</body>
+</html>
