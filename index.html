@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@berkayre4l | Kişisel Web Sitesi</title>
+    <title>@berkayre4l | SYSTEM INITIALIZATION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* === GENEL STİLLER === */
@@ -11,38 +11,55 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Courier New', 'Segoe UI', monospace;
         }
 
         :root {
-            --primary: #405DE6;
-            --secondary: #5851DB;
-            --accent: #833AB4;
-            --pink: #E1306C;
-            --orange: #FD1D1D;
-            --yellow: #FCAF45;
-            --dark: #262626;
-            --gray: #8e8e8e;
-            --light-gray: #dbdbdb;
-            --bg: #fafafa;
-            --white: #ffffff;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --neon-pink: #ff2a6d;
+            --dark-bg: #0a0a0f;
+            --darker-bg: #050510;
+            --terminal-green: #00ff88;
+            --terminal-text: #e0e0ff;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: var(--dark-bg);
+            color: var(--terminal-text);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
         }
 
-        .container {
-            max-width: 935px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* === ELEKTRİK EFEKTLERİ === */
+        .electric-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: electricFlow 3s linear infinite;
+            opacity: 0.7;
+        }
+
+        .electric-spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: spark 0.3s ease-out;
+        }
+
+        @keyframes electricFlow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw); opacity: 0; }
+        }
+
+        @keyframes spark {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
         }
 
         /* === LOADING EKRANI === */
@@ -52,70 +69,93 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--primary), var(--accent), var(--pink));
+            background: var(--darker-bg);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            color: white;
-            font-family: 'Courier New', monospace;
+            z-index: 1000;
         }
 
-        .terminal {
-            background: rgba(0, 0, 0, 0.7);
+        .cyber-terminal {
+            background: rgba(10, 10, 20, 0.9);
+            border: 1px solid var(--neon-blue);
             border-radius: 10px;
             padding: 30px;
-            width: 80%;
+            width: 90%;
             max-width: 700px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 
+                0 0 30px rgba(0, 243, 255, 0.3),
+                inset 0 0 20px rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-terminal::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--neon-blue), 
+                var(--neon-purple), 
+                var(--neon-pink), 
+                var(--neon-blue));
+            z-index: -1;
+            border-radius: 12px;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
         }
 
         .terminal-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--neon-blue);
+            padding-bottom: 15px;
         }
 
-        .terminal-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-button {
+        .pulse-dot {
             width: 12px;
             height: 12px;
+            background: var(--neon-pink);
             border-radius: 50%;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--neon-pink);
         }
 
-        .terminal-button.close {
-            background: #ff5f57;
-        }
-
-        .terminal-button.minimize {
-            background: #ffbd2e;
-        }
-
-        .terminal-button.maximize {
-            background: #28ca42;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
         }
 
         .terminal-title {
-            margin-left: 15px;
-            font-size: 14px;
-            color: var(--light-gray);
+            font-size: 16px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            letter-spacing: 2px;
         }
 
-        .terminal-content {
+        .typing-container {
             font-size: 18px;
-            line-height: 1.8;
+            line-height: 1.6;
+            min-height: 120px;
         }
 
         .typing-text {
-            border-right: 2px solid white;
+            color: var(--terminal-green);
+            text-shadow: 0 0 5px var(--terminal-green);
+            border-right: 2px solid var(--terminal-green);
             white-space: nowrap;
             overflow: hidden;
-            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+            animation: typing 4s steps(40, end), blink-caret 0.7s step-end infinite;
         }
 
         @keyframes typing {
@@ -125,472 +165,440 @@
 
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: white }
+            50% { border-color: var(--terminal-green) }
         }
 
-        .progress-bar {
+        .loading-bar-container {
             width: 100%;
             height: 4px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 243, 255, 0.2);
             border-radius: 2px;
             margin-top: 20px;
             overflow: hidden;
         }
 
-        .progress {
+        .loading-bar {
             height: 100%;
             width: 0%;
-            background: white;
-            animation: loading 2s ease-in-out forwards;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            animation: loading 3s ease-in-out forwards;
+            box-shadow: 0 0 10px var(--neon-blue);
         }
 
         @keyframes loading {
             to { width: 100% }
         }
 
-        /* === HEADER & NAVIGATION === */
-        header {
-            background-color: var(--white);
-            border-bottom: 1px solid var(--light-gray);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 22px;
-            font-weight: 600;
-        }
-
-        .logo i {
-            color: var(--primary);
-            margin-right: 8px;
-            font-size: 26px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* === PROFİL BÖLÜMÜ === */
-        .profile-section {
-            display: flex;
-            padding: 40px 0;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--accent), var(--pink), var(--orange));
-            padding: 4px;
-            margin-right: 80px;
-        }
-
-        .profile-pic img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid white;
-            background-color: #ddd;
-        }
-
-        .profile-info {
-            flex: 1;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .username {
-            font-size: 28px;
-            font-weight: 300;
-            margin-right: 20px;
-        }
-
-        .btn {
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-right: 8px;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--light-gray);
-            color: var(--dark);
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .stats {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 20px;
+        .system-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            font-size: 12px;
         }
 
         .stat {
             text-align: center;
+            padding: 8px;
+            background: rgba(0, 243, 255, 0.1);
+            border-radius: 4px;
         }
 
-        .stat-count {
-            font-weight: 700;
-            font-size: 16px;
+        /* === ANA İÇERİK === */
+        #main-content {
+            display: none;
+            min-height: 100vh;
+            position: relative;
         }
 
-        .stat-label {
-            font-size: 14px;
-            color: var(--gray);
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
         }
 
-        .bio {
-            margin-top: 15px;
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
 
-        .name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .bio-text {
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-
-        .website {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* === GÖREV BÖLÜMÜ === */
-        .games-section {
-            padding: 40px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 24px;
-            font-weight: 400;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 28px;
-        }
-
-        .game-card {
-            background-color: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .game-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .game-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
+        .profile-container {
+            position: relative;
+            z-index: 10;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            color: white;
-            font-size: 48px;
-        }
-
-        .game-info {
-            padding: 20px;
-        }
-
-        .game-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .game-description {
-            color: var(--gray);
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .game-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        /* === FOOTER === */
-        footer {
-            background-color: var(--white);
-            border-top: 1px solid var(--light-gray);
-            padding: 30px 0;
-            margin-top: 40px;
-            text-align: center;
-            color: var(--gray);
-            font-size: 14px;
-        }
-
-        .footer-links {
-            display: flex;
             justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 3D INSTAGRAM LOGOSU */
+        .instagram-3d {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 40px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite, rotate3d 20s linear infinite;
+        }
+
+        .instagram-3d::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            border-radius: 30px;
+            transform: translateZ(20px);
+            box-shadow: 
+                0 0 30px rgba(220, 39, 67, 0.6),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .instagram-3d::after {
+            content: '';
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            width: 50%;
+            height: 50%;
+            border: 3px solid white;
+            border-radius: 50%;
+            transform: translateZ(30px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .inner-circle {
+            position: absolute;
+            top: 35%;
+            left: 35%;
+            width: 30%;
+            height: 30%;
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translateZ(40px);
+        }
+
+        .logo-dot {
+            position: absolute;
+            top: 45%;
+            right: 25%;
+            width: 10%;
+            height: 10%;
+            background: white;
+            border-radius: 50%;
+            transform: translateZ(50px);
+            box-shadow: 0 0 10px white;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(10deg) rotateY(10deg); }
+            50% { transform: translateY(-20px) rotateX(-10deg) rotateY(-10deg); }
+        }
+
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(10deg); }
+        }
+
+        .heartbeat {
+            position: absolute;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            color: var(--neon-pink);
+            font-size: 14px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+        }
+
+        /* KULLANICI ADI */
+        .username {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .username-text {
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* GİRİŞ BUTONU */
+        .enter-btn {
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 60px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .enter-btn:hover::before {
+            left: 100%;
+        }
+
+        .enter-btn:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 
+                0 0 20px var(--neon-blue),
+                inset 0 0 20px rgba(0, 243, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* PROFİL İÇERİĞİ */
+        .profile-content {
+            display: none;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-title {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .profile-text {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            text-align: left;
+            background: rgba(0, 243, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--neon-blue);
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-btn:hover {
+            background: rgba(185, 103, 255, 0.1);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        /* SOSYAL MEDYA */
+        .social-links {
+            display: flex;
             gap: 20px;
-            margin-bottom: 20px;
+            margin-top: 30px;
         }
 
-        .footer-links a {
-            color: var(--gray);
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-blue);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        /* === RESPONSIVE TASARIM === */
-        @media (max-width: 768px) {
-            .profile-section {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .profile-pic {
-                margin-right: 0;
-                margin-bottom: 30px;
-            }
-            
-            .profile-header {
-                justify-content: center;
-            }
-            
-            .stats {
-                justify-content: center;
-            }
-            
-            .nav-links {
-                display: none;
-            }
+        .social-link:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: translateY(-3px);
         }
     </style>
 </head>
 <body>
+    <!-- Elektrik Efektleri -->
+    <div id="electric-effects"></div>
+
     <!-- Loading Ekranı -->
     <div id="loading-screen">
-        <div class="terminal">
+        <div class="cyber-terminal">
             <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-button close"></div>
-                    <div class="terminal-button minimize"></div>
-                    <div class="terminal-button maximize"></div>
-                </div>
-                <div class="terminal-title">SYSTEM INITIALIZATION</div>
+                <div class="pulse-dot"></div>
+                <div class="terminal-title">SYSTEM BOOTLOADER v2.4.7</div>
             </div>
-            <div class="terminal-content">
-                <div class="typing-text">Welcome to @berkayre4l Network...</div>
-                <div class="progress-bar">
-                    <div class="progress"></div>
-                </div>
+            <div class="typing-container">
+                <div class="typing-text">Initializing neural interface... Establishing secure connection...</div>
+            </div>
+            <div class="loading-bar-container">
+                <div class="loading-bar"></div>
+            </div>
+            <div class="system-stats">
+                <div class="stat">CPU: ██████████ 100%</div>
+                <div class="stat">MEM: ████████░░ 80%</div>
+                <div class="stat">NET: █████████░ 90%</div>
             </div>
         </div>
     </div>
 
     <!-- Ana İçerik -->
-    <div id="main-content" style="display: none;">
-        <!-- Header -->
-        <header>
-            <div class="container">
-                <nav class="navbar">
-                    <div class="logo">
+    <div id="main-content">
+        <div class="cyber-grid"></div>
+        
+        <div class="profile-container">
+            <!-- 3D Instagram Logosu -->
+            <div class="instagram-3d">
+                <div class="inner-circle"></div>
+                <div class="logo-dot"></div>
+                <div class="heartbeat">♥ 84 BPM</div>
+            </div>
+
+            <!-- Kullanıcı Adı -->
+            <div class="username">
+                <span class="username-text">@berkayre4l</span>
+            </div>
+
+            <!-- Giriş Butonu -->
+            <button class="enter-btn" id="enterBtn">
+                <i class="fas fa-terminal"></i> SİSTEME ERİŞİM
+            </button>
+
+            <!-- Profil İçeriği -->
+            <div class="profile-content" id="profileContent">
+                <h2 class="profile-title">SELAM, BEN BERKAY</h2>
+                
+                <div class="profile-text">
+                    <p><strong>Yazılım Mühendisi & Full-Stack Developer</strong></p>
+                    <br>
+                    <p>▸ 5+ yıllık profesyonel deneyim</p>
+                    <p>▸ Web & Mobile application development</p>
+                    <p>▸ Network security & infrastructure</p>
+                    <p>▸ Cloud computing solutions</p>
+                    <p>▸ AI/ML integration specialist</p>
+                    <br>
+                    <p>"Teknolojiyi insanlık için daha iyi bir gelecek inşa etmek için kullanıyorum."</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link">
                         <i class="fab fa-instagram"></i>
-                        <span>@berkayre4l</span>
-                    </div>
-                    <div class="nav-links">
-                        <a href="#home">Ana Sayfa</a>
-                        <a href="#games">Oyunlar</a>
-                        <a href="#projects">Projeler</a>
-                        <a href="#about">Hakkımda</a>
-                    </div>
-                </nav>
-            </div>
-        </header>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
 
-        <!-- Profil Bölümü -->
-        <section id="home">
-            <div class="container">
-                <div class="profile-section">
-                    <div class="profile-pic">
-                        <!-- Profil resmi buraya gelecek -->
-                        <div style="width:100%;height:100%;background:linear-gradient(45deg, #405DE6, #833AB4);border-radius:50%;display:flex;justify-content:center;align-items:center;color:white;font-size:48px;">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <div class="profile-info">
-                        <div class="profile-header">
-                            <h1 class="username">berkayre4l</h1>
-                            <button class="btn btn-primary">Takip Et</button>
-                            <button class="btn btn-outline">Mesaj</button>
-                            <button class="btn btn-outline"><i class="fas fa-user-plus"></i></button>
-                        </div>
-                        <div class="stats">
-                            <div class="stat">
-                                <div class="stat-count">127</div>
-                                <div class="stat-label">Gönderi</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-count">1.4K</div>
-                                <div class="stat-label">Takipçi</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-count">387</div>
-                                <div class="stat-label">Takip</div>
-                            </div>
-                        </div>
-                        <div class="bio">
-                            <div class="name">Berkay Real</div>
-                            <div class="bio-text">
-                                <strong>NETWORK</strong><br>
-                                <strong>SOCIAL CONTENT &</strong><br>
-                                <strong>WEB DEVELOPER</strong>
-                            </div>
-                            <a href="#" class="website">berkayreal.com</a>
-                        </div>
-                    </div>
-                </div>
+                <button class="back-btn" id="backBtn">
+                    <i class="fas fa-arrow-left"></i> GERİ
+                </button>
             </div>
-        </section>
-
-        <!-- Oyunlar Bölümü -->
-        <section id="games" class="games-section">
-            <div class="container">
-                <h2 class="section-title">Oyunlar & Projeler</h2>
-                <div class="games-grid">
-                    <!-- Oyun 1 -->
-                    <div class="game-card">
-                        <div class="game-image">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <div class="game-info">
-                            <h3 class="game-title">React Maze Game</h3>
-                            <p class="game-description">React.js ile geliştirilmiş interaktif labirent oyunu. Modern web teknolojileri kullanıldı.</p>
-                            <div class="game-stats">
-                                <span><i class="far fa-eye"></i> 2.4K</span>
-                                <span><i class="far fa-heart"></i> 187</span>
-                                <span><i class="far fa-comment"></i> 42</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Oyun 2 -->
-                    <div class="game-card">
-                        <div class="game-image" style="background:linear-gradient(45deg, #E1306C, #FCAF45)">
-                            <i class="fas fa-chess-knight"></i>
-                        </div>
-                        <div class="game-info">
-                            <h3 class="game-title">AI Chess Master</h3>
-                            <p class="game-description">Yapay zeka destekli satranç oyunu. Farklı zorluk seviyeleri ve analiz özellikleri.</p>
-                            <div class="game-stats">
-                                <span><i class="far fa-eye"></i> 3.1K</span>
-                                <span><i class="far fa-heart"></i> 256</span>
-                                <span><i class="far fa-comment"></i> 71</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Oyun 3 -->
-                    <div class="game-card">
-                        <div class="game-image" style="background:linear-gradient(45deg, #405DE6, #4CC9F0)">
-                            <i class="fas fa-meteor"></i>
-                        </div>
-                        <div class="game-info">
-                            <h3 class="game-title">Space Defender</h3>
-                            <p class="game-description">Uzay temalı aksiyon oyunu. Grafikler WebGL ile optimize edildi.</p>
-                            <div class="game-stats">
-                                <span><i class="far fa-eye"></i> 4.7K</span>
-                                <span><i class="far fa-heart"></i> 512</span>
-                                <span><i class="far fa-comment"></i> 124</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-links">
-                    <a href="#">Hakkında</a>
-                    <a href="#">Yardım</a>
-                    <a href="#">Basın</a>
-                    <a href="#">API</a>
-                    <a href="#">İş Fırsatları</a>
-                    <a href="#">Gizlilik</a>
-                    <a href="#">Koşullar</a>
-                    <a href="#">Konumlar</a>
-                </div>
-                <div class="copyright">
-                    © 2023 BERKAY REAL NETWORK
-                </div>
-            </div>
-        </footer>
+        </div>
     </div>
 
     <script>
-        // Loading ekranı için JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                document.getElementById('loading-screen').style.opacity = '0';
-                document.getElementById('main-content').style.display = 'block';
+        // Elektrik efektleri oluştur
+        function createElectricEffects() {
+            const container = document.getElementById('electric-effects');
+            
+            // Elektrik çizgileri
+            for (let i = 0; i < 8; i++) {
+                const line = document.createElement('div');
+                line.className = 'electric-line';
+                line.style.top = Math.random() * 100 + 'vh';
+                line.style.animationDelay = Math.random() * 5 + 's';
+                line.style.width = Math.random() * 200 + 100 + 'px';
+                container.appendChild(line);
+            }
+            
+            // Elektrik kıvılcımları
+            setInterval(() => {
+                const spark = document.createElement('div');
+                spark.className = 'electric-spark';
+                spark.style.left = Math.random() * 100 + 'vw';
+                spark.style.top = Math.random() * 100 + 'vh';
+                spark.style.animationDelay = '0s';
+                container.appendChild(spark);
                 
-                setTimeout(function() {
+                setTimeout(() => {
+                    spark.remove();
+                }, 300);
+            }, 100);
+        }
+
+        // Loading ekranı ve ana içerik geçişi
+        document.addEventListener('DOMContentLoaded', function() {
+            createElectricEffects();
+            
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
                     document.getElementById('loading-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
                 }, 1000);
-            }, 3500);
+            }, 4000);
+            
+            // Giriş butonu event listener
+            document.getElementById('enterBtn').addEventListener('click', function() {
+                document.querySelector('.profile-content').style.display = 'block';
+                document.querySelector('.enter-btn').style.display = 'none';
+                document.querySelector('.username').style.display = 'none';
+                document.querySelector('.instagram-3d').style.display = 'none';
+            });
+            
+            // Geri butonu event listener
+            document.getElementById('backBtn').addEventListener('click', function() {
+                document.querySelector('.profile-content').style.display = 'none';
+                document.querySelector('.enter-btn').style.display = 'block';
+                document.querySelector('.username').style.display = 'block';
+                document.querySelector('.instagram-3d').style.display = 'block';
+            });
         });
     </script>
 </body>
